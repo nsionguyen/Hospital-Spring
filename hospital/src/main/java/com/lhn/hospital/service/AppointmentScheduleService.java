@@ -1,6 +1,7 @@
 package com.lhn.hospital.service;
 
 import com.lhn.hospital.dto.request.AppointmentScheduleDTO;
+import com.lhn.hospital.dto.response.AppointmentSchedulesDTO;
 import com.lhn.hospital.entity.AppointmentSchedule;
 import com.lhn.hospital.entity.Doctor;
 import com.lhn.hospital.entity.User;
@@ -14,4 +15,5 @@ import java.util.Map;
 public interface AppointmentScheduleService {
     List<AppointmentSchedule> getAppointmentSchedulesUser(int booked_by);
     void createAppointment(AppointmentScheduleDTO dto);
+    List<AppointmentSchedulesDTO> getAppointmentsByDoctorId(Integer doctorId);
 }

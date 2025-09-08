@@ -2,10 +2,12 @@ package com.lhn.hospital.controller;
 
 
 
+import com.lhn.hospital.dto.request.PatientDTO;
 import com.lhn.hospital.entity.Patient;
 
 import com.lhn.hospital.service.PatientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,27 +22,30 @@ public class PatientRestController {
 
 
 
-    @GetMapping("/patients-booking")
-    public ResponseEntity<List<Patient>> getPatientsBooking() {
-        List<Patient> patients = patientService.getPatientsByUserId(1);
-        return ResponseEntity.ok(patients);
-    }
-
-    @PostMapping("/patients")
-    public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
-        Patient savedPatient = patientService.createPatient(patient);
-        return ResponseEntity.ok(savedPatient);
-    }
-
-    @GetMapping("/patients")
-    public ResponseEntity<List<Patient>> getAllPatients() {
-        List<Patient> patients = patientService.getAllPatients();
+    @GetMapping("/secure/patients-booking/{userId}")
+    public ResponseEntity<List<Patient>> getPatientsBooking( @PathVariable Integer userId) {
+        List<Patient> patients = patientService.getPatientsByUserId(userId);
         return ResponseEntity.ok(patients);
     }
 
 
 
+
+
+    @PostMapping("/secure/patients")
+    public ResponseEntity<Patient> createPatient(@RequestBody PatientDTO dto) {
+        Patient saved = patientService.createPatient(dto);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
+
+
+    }
+
+
+
+
+
+
 
 
 

@@ -2,6 +2,7 @@ package com.lhn.hospital.service.impl;
 
 
 import com.lhn.hospital.dto.request.AppointmentScheduleDTO;
+import com.lhn.hospital.dto.response.AppointmentSchedulesDTO;
 import com.lhn.hospital.entity.AppointmentSchedule;
 import com.lhn.hospital.entity.Doctor;
 import com.lhn.hospital.entity.Patient;
@@ -36,12 +37,12 @@ public class AppointmentScheduleServiceImpl implements AppointmentScheduleServic
     @Transactional
     public void createAppointment(AppointmentScheduleDTO dto) {
         try {
-            // Kiểm tra bác sĩ, bệnh nhân, bệnh viện như trước
+
             Doctor doctor = doctorRepository.findById(dto.getDoctor())
                     .orElseThrow(() -> new RuntimeException("Bác sĩ không tồn tại"));
             Patient patient = patientRepository.findById(dto.getPatient())
                     .orElseThrow(() -> new RuntimeException("Bệnh nhân không tồn tại"));
-            User user = userRepository.findById(dto.getHospital())
+            User user = userRepository.findById(dto.getBookBy())
                     .orElseThrow(() -> new RuntimeException("Bệnh viện không tồn tại"));
 
             // Chuyển đổi appointment_date từ String thành LocalDateTime
@@ -62,5 +63,12 @@ public class AppointmentScheduleServiceImpl implements AppointmentScheduleServic
             e.printStackTrace();
             throw new RuntimeException("Lỗi khi tạo lịch hẹn: " + e.getMessage(), e);
         }
+    }
+
+
+    @Override
+    public List<AppointmentSchedulesDTO> getAppointmentsByDoctorId(Integer doctorId) {
+
+        return appointmentScheduleRepository.findByDoctorId(doctorId);
     }
 }

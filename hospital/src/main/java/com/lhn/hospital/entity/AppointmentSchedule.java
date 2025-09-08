@@ -27,7 +27,7 @@ public class AppointmentSchedule {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private AppointmentScheduleStatus status = AppointmentScheduleStatus.PENDING;
+    private AppointmentScheduleStatus status = AppointmentScheduleStatus.ACCEPT;
 
     @Column(name = "note")
     private String note;

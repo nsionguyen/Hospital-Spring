@@ -30,6 +30,12 @@ public class Patient {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "home_town")
+    private String homeTown;
+
+    @Column(name = "gender")
+    private String gender;
+
     @ManyToOne
     @JoinColumn(name = "create_at")
     private User user;

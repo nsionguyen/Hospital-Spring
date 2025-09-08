@@ -33,7 +33,7 @@ public class UserRestController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDTO u) {
+    public ResponseEntity<?> login(@RequestBody User u) {
         System.out.println(">>> Đang xử lý login cho username: " + u.getUsername());
 
         if (userService.authenticate(u.getUsername(), u.getPassword())) {
@@ -53,9 +53,14 @@ public class UserRestController {
                 .body("Sai thông tin đăng nhập");
     }
 
-    @RequestMapping("/secure/profile")
+    @GetMapping("/secure/profile")
+    @ResponseBody
+    @CrossOrigin
     public ResponseEntity<User> getProfile(Principal principal) {
-        return new ResponseEntity<>(this.userService.getUserByUsername(principal.getName()), HttpStatus.OK);
+        return new ResponseEntity<>(
+                this.userService.getUserByUsername(principal.getName()),
+                HttpStatus.OK
+        );
     }
 
 

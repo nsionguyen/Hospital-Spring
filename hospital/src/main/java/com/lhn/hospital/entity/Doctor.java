@@ -1,6 +1,7 @@
 package com.lhn.hospital.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -12,17 +13,22 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "doctor")
+
 public class Doctor {
 
     @Id
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
     @Column(name = "image")
     private String image;
+
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "description")
     private String description;

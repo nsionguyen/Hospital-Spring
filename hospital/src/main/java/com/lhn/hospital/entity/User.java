@@ -18,7 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -63,11 +63,11 @@ public class User {
     @Column(name = "active")
     private Boolean active;
 
-    @Lob
+
     @Column(name = "user_role")
     private String userRole;
 
-    @Lob
+
     @Column(name = "user_type")
     private String userType;
 

@@ -13,4 +13,6 @@ public interface PatientRepository extends JpaRepository<Patient,Integer>{
     @Query("SELECT p FROM Patient p WHERE p.user.id = :userId")
     List<Patient> findByUserId(@Param("userId") Integer userId);
 
+
+
 }
