@@ -12,4 +12,6 @@ public interface ReviewRepository extends CrudRepository<Review, Integer> {
 
 
     List<Review> findByDoctor_Id(Integer doctorId);
+
+
 }

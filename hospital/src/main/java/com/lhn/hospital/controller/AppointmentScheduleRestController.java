@@ -25,7 +25,7 @@ public class AppointmentScheduleRestController {
 
     private final AppointmentScheduleService appointmentScheduleService;
 
-    @GetMapping("secure/appointmentSchedulesUser")
+    @GetMapping("/secure/appointmentSchedulesUser/{bookedById}")
     public ResponseEntity<List<AppointmentSchedule>> getDoctors(@PathVariable Integer bookedById) {
 
         return ResponseEntity.ok(appointmentScheduleService.getAppointmentSchedulesUser(bookedById));
@@ -49,11 +49,18 @@ public class AppointmentScheduleRestController {
 
         return list.stream().map(a -> {
             Map<String, Object> map = new HashMap<>();
-            map.put("title", "Doctor " + a.getDoctorId());
+            map.put("title", "Đã có hẹn ");
             map.put("start", a.getDate());
             map.put("end", a.getDate().plusMinutes(45));
             return map;
         }).collect(Collectors.toList());
+    }
+
+
+    @PutMapping("/secure/appointments/{id}/cancel")
+    public ResponseEntity<String> cancel(@PathVariable Integer id) {
+        appointmentScheduleService.cancelAppointment(id);
+        return ResponseEntity.ok("Hủy lịch thành công");
     }
 }
 

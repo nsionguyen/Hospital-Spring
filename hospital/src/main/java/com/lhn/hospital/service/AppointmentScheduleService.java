@@ -16,4 +16,5 @@ public interface AppointmentScheduleService {
     List<AppointmentSchedule> getAppointmentSchedulesUser(int booked_by);
     void createAppointment(AppointmentScheduleDTO dto);
     List<AppointmentSchedulesDTO> getAppointmentsByDoctorId(Integer doctorId);
+    void cancelAppointment(Integer id);
 }

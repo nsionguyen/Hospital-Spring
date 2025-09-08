@@ -7,6 +7,7 @@ import com.lhn.hospital.entity.AppointmentSchedule;
 import com.lhn.hospital.entity.Doctor;
 import com.lhn.hospital.entity.Patient;
 import com.lhn.hospital.entity.User;
+import com.lhn.hospital.entity.enums.AppointmentScheduleStatus;
 import com.lhn.hospital.repository.*;
 import com.lhn.hospital.service.AppointmentScheduleService;
 import jakarta.transaction.Transactional;
@@ -70,5 +71,14 @@ public class AppointmentScheduleServiceImpl implements AppointmentScheduleServic
     public List<AppointmentSchedulesDTO> getAppointmentsByDoctorId(Integer doctorId) {
 
         return appointmentScheduleRepository.findByDoctorId(doctorId);
+    }
+
+    @Override
+    public void cancelAppointment(Integer id) {
+        AppointmentSchedule schedule = appointmentScheduleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy lịch hẹn"));
+
+        schedule.setStatus(AppointmentScheduleStatus.CANCEL);
+        appointmentScheduleRepository.save(schedule);
     }
 }

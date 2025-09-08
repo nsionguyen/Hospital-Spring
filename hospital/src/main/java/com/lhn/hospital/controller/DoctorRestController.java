@@ -37,6 +37,8 @@ public class DoctorRestController {
         return new ResponseEntity<>(this.doctorService.getComments(id), HttpStatus.OK);
     }
 
+
+
     @GetMapping("/doctors-booking")
     public ResponseEntity<List<Doctor>> getDoctorsByHospitalAndSpecialty(
             @RequestParam(required = false) Integer hospitalId,

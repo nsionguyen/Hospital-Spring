@@ -17,8 +17,10 @@ public interface AppointmentScheduleRepository extends JpaRepository<Appointment
 
     @Query("SELECT new com.lhn.hospital.dto.response.AppointmentSchedulesDTO(a.doctor.id, a.date) " +
             "FROM AppointmentSchedule a " +
-            "WHERE a.doctor.id = :doctorId")
+            "WHERE a.doctor.id = :doctorId " +
+            "AND a.status = com.lhn.hospital.entity.enums.AppointmentScheduleStatus.ACCEPT")
     List<AppointmentSchedulesDTO> findByDoctorId(@Param("doctorId") Integer doctorId);
+
 
 
 }
