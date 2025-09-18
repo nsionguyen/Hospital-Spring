@@ -26,12 +26,13 @@ public class PaymentRestController {
 //        String orderType = "other";
 //        long amount = Integer.parseInt(req.getParameter("amount"))*100;
 //        String bankCode = req.getParameter("bankCode");
-        long amount = 1000000;
+        long amount = 100000;
 
         String vnp_TxnRef = Config.getRandomNumber(8);
 //        String vnp_IpAddr = Config.getIpAddress(req);
 
         String vnp_TmnCode = Config.vnp_TmnCode;
+        String vnp_OrderInfo = "Thanh toan don hang";
 
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", Config.vnp_Version);

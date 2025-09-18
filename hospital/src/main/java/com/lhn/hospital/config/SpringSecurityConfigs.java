@@ -43,7 +43,7 @@ public class SpringSecurityConfigs {
             Exception {
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(c -> c.disable()).authorizeHttpRequests(requests
-                        -> requests.requestMatchers("/", "/home").authenticated()
+                        -> requests.requestMatchers("/", "/home").permitAll()
                         .requestMatchers("/login", "/api/register").permitAll()
                         .requestMatchers("/api/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products").hasRole("ADMIN")
